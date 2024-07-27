@@ -1,18 +1,20 @@
 #include <SFML/Graphics.hpp>
+#include "FrameRate.h"
 
 int main()
 {
     //-----------------INITIALIZE----------------------
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!", sf::Style::Default, settings);
+    sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Default, settings);
     window.setFramerateLimit(360);
     //-----------------INITIALIZE----------------------
-
+    FrameRate frameRate;
     //-----------------INITIALIZE----------------------
+    frameRate.Initialize();
     //-----------------INITIALIZE----------------------
-
     //-----------------LOAD----------------------
+    frameRate.Load();
     //-----------------LOAD----------------------
     sf::Clock clock;
     while (window.isOpen())
@@ -27,9 +29,10 @@ int main()
                 window.close();
         }
         //-----------------UPDATE----------------------
-
+        frameRate.Update(deltaTime);
         //-----------------DRAW----------------------
         window.clear(sf::Color::Black);
+        frameRate.Draw(window);
         window.display();
         //-----------------DRAW----------------------
     }
